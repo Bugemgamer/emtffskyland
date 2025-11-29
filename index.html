@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J4CK FF EMOTE Portal - INFO & EMOTE (NO LOGIN)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* BASE STYLES - SHAHIDADEV GLOW THEME */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #110e1b;
+            color: #ffffff;
+            min-height: 100vh; 
+            overflow-x: hidden;
+            display: block; 
+        }
+
+        .container {
+            width: 100%;
+            max-width: 450px;
+            margin: 0 auto;
+            padding: 0;
+            position: relative;
+            min-height: 100vh;
+            background: #110e1b;
+        }
+
+        /* --- TOP NAV BAR --- */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            background: #110e1b;
+            border-bottom: 1px solid #2a2542;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .top-nav-center {
+            font-weight: 700;
+            font-size: 18px;
+            color: #ffffff;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .top-nav i {
+            font-size: 20px;
+            color: #f7d04f;
+        }
+
+        .flag-dropdown {
+            background: #2a2542;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 1px solid #4d446f;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+        }
+
+        /* --- EMOTE PAGE CREDENTIALS CARD --- */
+        .credentials-card {
+            padding: 20px 15px;
+            margin: 20px 15px 0;
+            background: #1f1b31;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .credentials-card h2 {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 25px;
+            color: #ffffff;
+            text-shadow: 0 0 5px rgba(247, 208, 79, 0.2);
+        }
+
+        .uid-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .credential-input {
+            background: #2a2542;
+            border: 1px solid #4d446f;
+            border-radius: 8px;
+            padding: 12px 10px;
+            color: #f7d04f;
+            font-size: 16px;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 0 10px rgba(247, 208, 79, 0.1);
+            font-weight: 600;
+            width: 100%;
+        }
+
+        .credential-input::placeholder {
+            color: rgba(247, 208, 79, 0.7);
+        }
+
+        .team-code-input { grid-column: 1 / span 2; }
+
+        /* --- PAGE CONTAINER --- */
+        .content-page {
+            padding: 20px 15px;
+            padding-bottom: 80px;
+        }
+
+        .search-box {
+            background: #1f1b31;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            padding: 10px 15px;
+            box-shadow: 0 0 8px rgba(247, 208, 79, 0.4);
+        }
+
+        .search-box input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: #f0f0f0;
+            font-size: 16px;
+            padding: 5px 0;
+        }
+
+        /* Filters */
+        .filters h3 { 
+            font-size: 18px; 
+            margin-bottom: 15px; 
+            color: #f7d04f;
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #2a2542;
+            color: white;
+            border: 1px solid #4d446f;
+        }
+
+        /* Emote grid */
+        .emote-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        .emote-item {
+            background: #1f1b31;
+            border-radius: 12px;
+            border: 1px solid #2a2542;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+            transition: transform 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .emote-item:hover {
+            transform: translateY(-3px);
+            border-color: #f7d04f;
+            box-shadow: 0 5px 25px rgba(247, 208, 79, 0.3);
+        }
+
+        .emote-name { font-size: 16px; font-weight: 700; }
+        .emote-id { font-size: 13px; color: #b0c4de; }
+
+        .send-button {
+            background: linear-gradient(90deg, #f7d04f 0%, #ff9900 100%);
+            color: #110e1b;
+            border: none;
+            padding: 8px 15px; 
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        /* Bottom nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 450px;
+            display: flex;
+            justify-content: space-around;
+            background: #1f1b31;
+            padding: 10px 0;
+            border-top: 2px solid #2a2542;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.5);
+            z-index: 200;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            font-size: 12px;
+        }
+
+        .nav-item i {
+            font-size: 24px;
+            margin-bottom: 3px;
+            color: #b0b0b0;
+        }
+
+        .nav-item.active i,
+        .nav-item:hover i {
+            color: #f7d04f;
+        }
+
+        /* Modal */
+        #response-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .response-content {
+            background: #1f1b31;
+            padding: 25px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            border: 2px solid #f7d04f;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- LOGIN SUDAH DIHAPUS TOTAL -->
+<!-- MAIN APP LANGSUNG TAMPIL -->
+<div id="main-app" class="container" style="display:block;">
+<!-- TOP NAV -->
+    <div class="top-nav">
+        <i class="fab fa-telegram-plane"></i>
+        <i class="fab fa-youtube"></i>
+        <div class="top-nav-center">J4CK FF BOT</div>
+        <div class="flag-dropdown" id="region-display">
+            <img id="region-flag" src="https://flagcdn.com/in.svg" width="20">
+            <span id="region-code">IND</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </div>
+
+    <!-- EMOTE PAGE -->
+    <div id="emote-page" class="content-page" style="display:block;">
+        <div class="credentials-card">
+            <h2>Enter Team Details</h2>
+
+            <div class="uid-grid">
+                <input type="text" id="uid1" class="credential-input" placeholder="UID 1">
+                <input type="text" id="uid2" class="credential-input" placeholder="UID 2">
+                <input type="text" id="uid3" class="credential-input" placeholder="UID 3">
+                <input type="text" id="uid4" class="credential-input" placeholder="UID 4">
+
+                <input type="text" id="team-code" class="credential-input team-code-input" placeholder="Enter Team Code">
+            </div>
+
+            <p style="text-align:center;color:#b0c4de;font-size:14px;margin-top:15px;">
+                Select an emote below to send the request to the entered IDs.
+            </p>
+        </div>
+
+        <div class="emote-section">
+            <div class="search-box">
+                <input type="text" id="emote-search" placeholder="Search by Name or ID">
+            </div>
+
+            <div class="filters">
+                <h3>Filters</h3>
+                <div class="filter-buttons">
+                    <button class="filter-btn" data-filter="all">ALL</button>
+                    <button class="filter-btn" data-filter="evos">EVOS</button>
+                    <button class="filter-btn" data-filter="common">COMMON</button>
+                    <button class="filter-btn" data-filter="rare">RARE</button>
+                    <button class="filter-btn" data-filter="epic">EPIC</button>
+                    <button class="filter-btn" data-filter="mythic">MYTHIC</button>
+                    <button class="filter-btn" data-filter="artifact">ARTIFACT</button>
+                    <button class="filter-btn" data-filter="upcoming">UPCOMING</button>
+                </div>
+            </div>
+
+            <div class="emote-grid" id="emote-grid"></div>
+        </div>
+    </div>
+
+    <!-- INFO PAGE -->
+    <div id="info-page" class="content-page" style="display:none;">
+        <div class="credentials-card">
+            <h2>Check Free Fire Profile</h2>
+            <p>Enter UID and select region.</p>
+
+            <input id="info-uid" class="credential-input" placeholder="Enter Free Fire UID">
+
+            <select id="info-region" class="credential-input">
+                <option value="ind" data-flag="in">IND (India)</option>
+                <option value="sg" data-flag="sg">SG (Singapore)</option>
+                <option value="br" data-flag="br">BR (Brazil)</option>
+                <option value="ru" data-flag="ru">RU (Russia)</option>
+                <option value="id" data-flag="id">ID (Indonesia)</option>
+                <option value="tw" data-flag="tw">TW (Taiwan)</option>
+                <option value="us" data-flag="us">US (United States)</option>
+                <option value="vn" data-flag="vn">VN (Vietnam)</option>
+                <option value="th" data-flag="th">TH (Thailand)</option>
+                <option value="me" data-flag="me">ME (Middle East)</option>
+                <option value="pk" data-flag="pk">PK (Pakistan)</option>
+                <option value="cis" data-flag="cis">CIS (CIS Region)</option>
+                <option value="bd" data-flag="bd">BD (Bangladesh)</option>
+            </select>
+
+            <button id="info-search-btn" class="info-button">
+                <i class="fas fa-search"></i> Search Profile
+            </button>
+
+            <div id="info-loading" style="display:none;text-align:center;color:#f7d04f;margin-top:15px;">
+                <div class="loading"></div> Loading...
+            </div>
+
+            <div id="info-result"></div>
+        </div>
+
+        <!-- BAN CHECK -->
+        <div class="credentials-card" style="margin-top:20px;">
+            <h2>Free Fire Ban Checker</h2>
+            <p>Check if a player is banned using their UID</p>
+
+            <input id="ban-uid" class="credential-input" placeholder="Enter Free Fire UID">
+
+            <button id="ban-check-btn" class="ban-button">
+                <i class="fas fa-shield-alt"></i> Check Ban Status
+            </button>
+
+            <div id="ban-loading" style="display:none;text-align:center;color:#f7d04f;margin-top:15px;">
+                <div class="loading"></div> Checking...
+            </div>
+
+            <div id="ban-result"></div>
+        </div>
+    </div>
+
+    <!-- BOTTOM NAV -->
+    <div class="bottom-nav">
+        <a href="#" class="nav-item" data-page="spam">
+            <i class="fas fa-times-circle"></i>
+            <span>Spam</span>
+        </a>
+
+        <a href="#" class="nav-item" data-page="info">
+            <i class="fas fa-user-circle"></i>
+            <span>Info</span>
+        </a>
+
+        <a href="#" class="nav-item active" data-page="emote">
+            <i class="fas fa-theater-masks"></i>
+            <span>Emote</span>
+        </a>
+    </div>
+
+    <!-- RESPONSE MODAL -->
+    <div id="response-modal">
+        <div class="response-content">
+            <h4><i class="fas fa-server"></i> API Response</h4>
+            <div id="response-box-text"></div>
+            <button class="close-response-btn" id="close-response-modal">Close</button>
+        </div>
+    </div>
+    <script>
+/* ================================
+        CONFIGURASI API
+================================ */
+const EMOTE_API_URL = 'https://dev-emote-api-pxwd.onrender.com/join';
+const INFO_API_URL = 'https://info-ob49.vercel.app/api/account/?uid={UID}&region={REGION}';
+const BAN_API_URL  = 'https://ban-git-main-j4ck-ffs-projects.vercel.app/checkbanned?id={UID}';
+
+/* ================================
+        EMOTE LIST (DEFAULT)
+================================ */
+const EMOTES = [
+    { id: '909000001', name: 'Hello!' },
+    { id: '909000004', name: 'Applause' },
+    { id: '909000075', name: 'Cobra Rising' },
+    { id: '909000063', name: 'Ak Max' },
+    { id: '909035007', name: 'Shotgun Max' },
+    // Kamu bisa menambahkan semua emote lainnya dari file asli.
+];
+
+
+/* ================================
+        ON DOCUMENT READY
+================================ */
+document.addEventListener('DOMContentLoaded', function () {
+
+    const navItems = document.querySelectorAll('.nav-item');
+    const emotePage = document.getElementById('emote-page');
+    const infoPage = document.getElementById('info-page');
+    const emoteGrid = document.getElementById('emote-grid');
+    const responseModal = document.getElementById('response-modal');
+    const responseBoxText = document.getElementById('response-box-text');
+
+    const emoteSearchInput = document.getElementById('emote-search');
+    const infoUidInput = document.getElementById('info-uid');
+    const infoRegionSelect = document.getElementById('info-region');
+    const infoSearchBtn = document.getElementById('info-search-btn');
+
+    const banUidInput = document.getElementById('ban-uid');
+    const banCheckBtn = document.getElementById('ban-check-btn');
+
+    /* ================================
+            NAVIGATION 
+    ================================= */
+    function showPage(page) {
+        emotePage.style.display = (page === 'emote') ? 'block' : 'none';
+        infoPage.style.display  = (page === 'info') ? 'block' : 'none';
+
+        navItems.forEach(i => i.classList.remove('active'));
+        document.querySelector(`.nav-item[data-page="${page}"]`).classList.add('active');
+    }
+
+    navItems.forEach(item => {
+        item.addEventListener('click', e => {
+            e.preventDefault();
+            const page = item.getAttribute('data-page');
+
+            if (page === 'spam') {
+                showResponse("❌ Spam feature is under maintenance", "error");
+            } else {
+                showPage(page);
+            }
+        });
+    });
+
+    showPage('emote');  // Default setelah website dibuka
+
+
+    /* ================================
+            RENDER EMOTE GRID
+    ================================= */
+    function renderEmotes(list) {
+        emoteGrid.innerHTML = '';
+
+        list.forEach(emote => {
+            const div = document.createElement('div');
+            div.className = 'emote-item';
+
+            div.innerHTML = `
+                <div class="emote-details">
+                    <p class="emote-name">${emote.name}</p>
+                    <p class="emote-id">ID: ${emote.id}</p>
+                </div>
+
+                <button class="send-button" data-id="${emote.id}">
+                    Send Emote
+                </button>
+            `;
+
+            div.querySelector('.send-button').addEventListener('click', function () {
+                sendEmote(emote.id);
+            });
+
+            emoteGrid.appendChild(div);
+        });
+    }
+
+    renderEmotes(EMOTES);
+
+
+    /* ================================
+            SEARCH EMOTE
+    ================================= */
+    emoteSearchInput.addEventListener('input', function () {
+        const search = this.value.toLowerCase();
+        const result = EMOTES.filter(e =>
+            e.name.toLowerCase().includes(search) ||
+            e.id.includes(search)
+        );
+        renderEmotes(result);
+    });
+
+
+    /* ================================
+            SEND EMOTE API CALL
+    ================================= */
+    function sendEmote(emoteID) {
+
+        const uid1 = document.getElementById('uid1').value.trim();
+        const uid2 = document.getElementById('uid2').value.trim();
+        const uid3 = document.getElementById('uid3').value.trim();
+        const uid4 = document.getElementById('uid4').value.trim();
+        const team  = document.getElementById('team-code').value.trim();
+
+        if (!uid1 && !uid2 && !uid3 && !uid4) {
+            return showResponse("⚠️ Enter at least 1 UID!", "error");
+        }
+
+        fetch(EMOTE_API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                uid1, uid2, uid3, uid4,
+                teamcode: team,
+                emoteid: emoteID
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            showResponse(JSON.stringify(data, null, 2), "success");
+        })
+        .catch(err => {
+            showResponse("❌ Error connecting to API.", "error");
+        });
+    }
+
+
+    /* ================================
+            PROFILE CHECKER
+    ================================= */
+    infoSearchBtn.addEventListener('click', function() {
+
+        const uid = infoUidInput.value.trim();
+        const region = infoRegionSelect.value;
+
+        if (!uid) return showResponse("⚠️ Enter UID!", "error");
+
+        const url = INFO_API_URL
+            .replace("{UID}", uid)
+            .replace("{REGION}", region);
+
+        fetch(url)
+            .then(r => r.json())
+            .then(data => {
+                const box = `
+                    <div class="result-title">Profile Info</div>
+                    <pre class="raw-json-pre">${JSON.stringify(data, null, 2)}</pre>
+                `;
+                document.getElementById('info-result').innerHTML = box;
+            })
+            .catch(() => {
+                showResponse("❌ Failed to fetch info.", "error");
+            });
+    });
+
+
+    /* ================================
+            BAN CHECKER
+    ================================= */
+    banCheckBtn.addEventListener('click', function () {
+
+        const uid = banUidInput.value.trim();
+        if (!uid) return showResponse("⚠️ Enter UID!", "error");
+
+        const url = BAN_API_URL.replace("{UID}", uid);
+
+        fetch(url)
+            .then(r => r.json())
+            .then(data => {
+                const html = `
+                    <div class="result-title">Ban Status</div>
+                    <pre class="raw-json-pre">${JSON.stringify(data, null, 2)}</pre>
+                `;
+                document.getElementById('ban-result').innerHTML = html;
+            })
+            .catch(() => {
+                showResponse("❌ API error while checking ban!", "error");
+            });
+    });
+
+
+    /* ================================
+            MODAL SYSTEM
+    ================================= */
+    function showResponse(msg, type) {
+        responseBoxText.textContent = msg;
+        responseModal.style.display = 'flex';
+    }
+
+    document.getElementById('close-response-modal').addEventListener('click', function () {
+        responseModal.style.display = 'none';
+    });
+
+});
+</script>
+
+</body>
+</html>
